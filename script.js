@@ -13,18 +13,23 @@ if (savedTask) {
 function createTask(task) {
 
     let li = document.createElement("li");
-    li.textContent = task;
+    let text = document.createElement("span");
+    text.textContent = task;
+    text.classList.add("task-text");
+
+
+    let btnContainer = document.createElement("div");
+    btnContainer.classList.add("btn-container");
 
     let completebtn = document.createElement("button");
     completebtn.textContent = "complete";
     completebtn.classList.add("complete-btn");
 
+
     completebtn.addEventListener("click", () => {
         li.classList.toggle("completed");
     })
 
-    // let deletebtn = document.createElement("button");
-    //
     let deletebtn = document.createElement("button");
     deletebtn.textContent = "Erase";
     deletebtn.classList.add("delete-btn");
@@ -32,10 +37,13 @@ function createTask(task) {
         tasks = tasks.filter((t) => t !== task);
         localStorage.setItem("task", JSON.stringify(tasks));
         li.remove();
-    })
+    });
 
-    li.appendChild(completebtn);
-    li.appendChild(deletebtn);
+    btnContainer.appendChild(completebtn);
+    btnContainer.appendChild(deletebtn);
+    li.appendChild(text);
+    li.appendChild(btnContainer);
+
     list.appendChild(li);
 
 }
