@@ -15,17 +15,22 @@ function createTask(task) {
     let li = document.createElement("li");
     li.textContent = task;
 
-
     let completebtn = document.createElement("button");
     completebtn.textContent = "complete";
+    completebtn.classList.add("complete-btn");
 
     completebtn.addEventListener("click", () => {
-        li.classList.toggle("complete");
+        li.classList.toggle("completed");
     })
 
+    // let deletebtn = document.createElement("button");
+    //
     let deletebtn = document.createElement("button");
-    deletebtn.textContent = "Delete";
+    deletebtn.textContent = "Erase";
+    deletebtn.classList.add("delete-btn");
     deletebtn.addEventListener("click", () => {
+        tasks = tasks.filter((t) => t !== task);
+        localStorage.setItem("task", JSON.stringify(tasks));
         li.remove();
     })
 
@@ -53,4 +58,8 @@ button.addEventListener("click", () => {
 
 
 });
-
+input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        button.click();
+    }
+});
