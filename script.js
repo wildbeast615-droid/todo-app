@@ -10,7 +10,7 @@ if (savedTask) {
 
 
 
-function createTask(task) {
+function createTask(task, index) {
 
     let li = document.createElement("li");
     let text = document.createElement("span");
@@ -34,7 +34,7 @@ function createTask(task) {
     deletebtn.textContent = "Erase";
     deletebtn.classList.add("delete-btn");
     deletebtn.addEventListener("click", () => {
-        tasks = tasks.filter((t) => t !== task);
+        tasks = tasks.filter((_, i) => i !== index);
         localStorage.setItem("task", JSON.stringify(tasks));
         li.remove();
     });
@@ -47,9 +47,9 @@ function createTask(task) {
     list.appendChild(li);
 
 }
-tasks.forEach((task) => {
+tasks.forEach((task, index) => {
 
-    createTask(task);
+    createTask(task, tasks.length - 1);
 });
 
 button.addEventListener("click", () => {
